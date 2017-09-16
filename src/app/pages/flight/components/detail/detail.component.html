@@ -1,0 +1,9 @@
+<h1>
+  <button class="btn btn-outline-secondary" (click)="goBack()"><i class="fa fa-arrow-left"></i></button>
+  <button class="btn btn-outline-secondary" [routerLink]="['../edit']"><i class="fa fa-pencil"></i> Edit</button>
+  Details for flight {{ (flight$ | async)?.id }}
+</h1>
+
+<pre>
+  {{flight$ | async | json}}
+</pre>

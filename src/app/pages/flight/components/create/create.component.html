@@ -1,0 +1,42 @@
+<h1>
+  <button class="btn btn-outline-secondary" (click)="goBack()"><i class="fa fa-arrow-left"></i></button>
+  Create Flight</h1>
+<div class="alert alert-danger" *ngIf="message">{{message}}</div>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-block">
+        <form class="col" [formGroup]="flightForm" novalidate>
+
+
+            <div class="form-group">
+              <label>From:</label>
+              <input type="text" class="form-control" name="from" formControlName="from" required #from>
+              <span class="form-text text-danger" *ngIf="flightForm.get('from').invalid && flightForm.get('from').touched">Required</span>
+            </div>
+
+            <div class="form-group">
+              <label>To:</label>
+              <input type="text" name="to" formControlName="to" class="form-control" required #to>
+              <span class="form-text text-danger" *ngIf="flightForm.get('to').invalid && flightForm.get('to').touched">Required</span>
+            </div>
+
+            <div class="form-group" >
+              <label>Date:</label>
+              <input type="text" name="date" formControlName="date" class="form-control" required #date>
+              <span class="form-text text-danger" *ngIf="flightForm.get('date').invalid && flightForm.get('date').touched">Required</span>
+            </div>
+
+            <br/>
+
+            <div class="form-group">
+              <button (click)="create(flightForm)" class="btn btn-primary">
+                Create Flight
+              </button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

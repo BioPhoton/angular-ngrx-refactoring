@@ -1,0 +1,65 @@
+<h1>
+  Flight Search: <br/>
+  <small class="text-danger"> url: {{getUrl()}}</small>
+</h1>
+
+<div class="card">
+  <div class="card-body" [formGroup]="searchForm">
+
+    <div class="form-group row">
+      <label for="from" class="col-2 col-form-label">From:</label>
+      <div class="col-10">
+        <input class="form-control is-valid" type="text" id="from"
+          formControlName="from">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="to" class="col-2 col-form-label">To:</label>
+      <div class="col-10">
+        <input class="form-control is-valid" type="text" id="to"
+          formControlName="to">
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button
+      (click)="searchFlights(searchForm)"
+      class="btn btn-outlined-secondary">
+      Search
+    </button>
+  </div>
+</div>
+<br/>
+<h2>
+  Verfügbare Flüge
+  <button class="btn btn-outline-secondary pull-right"
+    [routerLink]="['../create']"><i class="fa fa-plus"></i> Create
+  </button>
+</h2>
+<br/>
+<table class="table table-condensed table-warning">
+  <tr>
+    <th>Id</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Date</th>
+    <th colspan="2">
+      <button class="btn btn-sm btn-info" (click)="refreshFlights()">
+        <i class="fa fa-refresh" [ngClass]="{'fa-spin' : isFindPending$ | async}"></i>
+      </button>
+    </th>
+  </tr>
+  <tr *ngFor="let f of (searchResult$ | async); trackBy: trackByDate">
+    <td>{{f.id}}</td>
+    <td>{{f.from}}</td>
+    <td>{{f.to}}</td>
+    <td>{{f.date | date:'dd.MM.yyyy HH:mm' }}</td>
+    <td>
+      <a class="btn btn-outline-secondary btn-default"
+        [routerLink]="['../', f.id, 'detail']">Detail</a>
+      <a class="btn btn-outline-secondary btn-default"
+        [routerLink]="['../', f.id, 'edit']">Edit</a>
+    </td>
+  </tr>
+</table>
