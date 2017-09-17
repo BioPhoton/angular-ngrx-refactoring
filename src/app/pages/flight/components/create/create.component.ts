@@ -16,7 +16,7 @@ export class CreateComponent {
   constructor(
     private fb: FormBuilder,
     private location: Location,
-    private fs: FlightResource,
+    private fr: FlightResource,
     private router: Router
   ) {
     this.flightForm = this.fb.group({
@@ -33,7 +33,7 @@ export class CreateComponent {
   create(form) {
 
     if (form.valid) {
-      this.fs.post(form.value)
+      this.fr.post(form.value)
         .subscribe(
           (response) => {
             this.router.navigate(['flight', response.id]);
