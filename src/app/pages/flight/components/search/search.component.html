@@ -1,8 +1,8 @@
 <h1>
-  Flight Search: <br/>
-  <small class="text-danger"> url: {{getUrl()}}</small>
+  Flight Search
 </h1>
 
+<small class="url-state font-weight-bold text-danger">{{'URL: '+getUrl()}}</small>
 <div class="card">
   <div class="card-body" [formGroup]="searchForm">
 
@@ -22,10 +22,10 @@
       </div>
     </div>
   </div>
-  <div class="card-footer">
+  <div class="card-footer bg-white">
     <button
       (click)="searchFlights(searchForm)"
-      class="btn btn-outlined-secondary">
+      class="btn btn-outline-secondary">
       Search
     </button>
   </div>
