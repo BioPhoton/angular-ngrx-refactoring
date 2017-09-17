@@ -24,8 +24,6 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    console.log('location: ', this.document.location.href)
-    // setup form
     this.searchForm = fb.group({
       from: [],
       to: []
