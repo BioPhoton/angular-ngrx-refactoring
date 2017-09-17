@@ -62,7 +62,7 @@ export class SearchComponent implements OnInit {
   }
 
   refreshFlights() {
-    this.fs.find(null, null)
+    this.router.navigate(['./', {from: null, to: null}])
   }
 
   private orderByDate(a, b) {
