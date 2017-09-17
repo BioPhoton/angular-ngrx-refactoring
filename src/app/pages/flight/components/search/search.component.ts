@@ -33,7 +33,6 @@ export class SearchComponent implements OnInit {
 
     this.route.params.subscribe(
       (data: { from: string, to: string }) => {
-        this.fs.find(data.from, data.to)
         const searchFormData = Object.assign({from: '', to: ''}, data)
         this.searchForm.patchValue(searchFormData)
       }
