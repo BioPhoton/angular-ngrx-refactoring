@@ -6,6 +6,11 @@ import {AppRouterModule} from './app.routing.module';
 import {CoreModule} from './core/core.module';
 import {FlightModule} from './pages/flight/flight.module';
 import {HomeModule} from './pages/home/home.module';
+import {StoreModule} from '@ngrx/store';
+
+export interface IDB {}
+
+const reducer = {}
 
 @NgModule({
   declarations: [
@@ -17,6 +22,7 @@ import {HomeModule} from './pages/home/home.module';
     CoreModule.forRoot(),
     HomeModule,
     FlightModule.forRoot(),
+    StoreModule.forRoot(reducer)
   ],
   providers: [],
   bootstrap: [AppComponent]
