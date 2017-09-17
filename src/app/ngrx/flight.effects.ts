@@ -27,10 +27,7 @@ export class FlightEffects {
       return n.payload.event.url.indexOf('flight')
     })
     .switchMap((action: any) => {
-      // extract params from url
-      const rS = action.payload.routerState
-      const searchParams = rS.root.firstChild.params
-      // trigger FindAction with search params
+      const searchParams = action.payload.routerState.params
       return Observable.of(new flight.FindAction(searchParams))
     });
 
