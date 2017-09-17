@@ -12,10 +12,14 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
 import {FlightEffects} from './ngrx/flight.effects';
 import * as fromRouter from '@ngrx/router-store';
+import {
+  CustomSerializer,
+  IRouterStateUrl
+} from './ngrx/router-state.serializer';
 
 export interface IDB {
   flightBranch: IFlightState,
-  routerBranch: fromRouter.RouterReducerState<any>
+  routerBranch: fromRouter.RouterReducerState<IRouterStateUrl>
 }
 
 const reducer = {
@@ -42,7 +46,9 @@ const effects = [FlightEffects]
     EffectsModule.forRoot(effects),
     fromRouter.StoreRouterConnectingModule
   ],
-  providers: [],
+  providers: [
+    {provide: fromRouter.RouterStateSerializer, useClass: CustomSerializer}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
