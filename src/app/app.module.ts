@@ -11,13 +11,16 @@ import {flightReducer, IFlightState} from './ngrx/flight.reducer';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
 import {FlightEffects} from './ngrx/flight.effects';
+import * as fromRouter from '@ngrx/router-store';
 
 export interface IDB {
-  flightBranch: IFlightState
+  flightBranch: IFlightState,
+  routerBranch: fromRouter.RouterReducerState<any>
 }
 
 const reducer = {
-  flightBranch: flightReducer
+  flightBranch: flightReducer,
+  routerBranch: fromRouter.routerReducer
 }
 
 const effects = [FlightEffects]
@@ -36,7 +39,8 @@ const effects = [FlightEffects]
     StoreDevtoolsModule.instrument({
       maxAge: 10 //  Buffers the last 10 states
     }),
-    EffectsModule.forRoot(effects)
+    EffectsModule.forRoot(effects),
+    fromRouter.StoreRouterConnectingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
