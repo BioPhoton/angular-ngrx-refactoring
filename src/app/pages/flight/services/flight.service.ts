@@ -22,7 +22,7 @@ export class FlightService {
   }
 
   find(from?: string, to?: string) {
-    this.store.dispatch(new flight.FindAction())
+    this.store.dispatch(new flight.FindAction({from, to}))
   }
 
   edit(flight: Flight) {
