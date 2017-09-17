@@ -15,7 +15,9 @@ export class FlightEffects {
       const from = action.payload.from
       const to = action.payload.to
       // handle side effects here
-
+      this.fr.find(from, to)
+        .subscribe(n => {this.store.dispatch(new flight.FindSuccessAction(n))},
+          e => {this.store.dispatch(new flight.FindFailAction())})
     })
 
   constructor(private actions$: Actions,
