@@ -9,6 +9,7 @@ import {HomeModule} from './pages/home/home.module';
 import {StoreModule} from '@ngrx/store';
 import {flightReducer, IFlightState} from './ngrx/flight.reducer';
 import {EffectsModule} from '@ngrx/effects';
+import {FlightEffects} from './ngrx/flight.effects';
 
 export interface IDB {
   flightBranch: IFlightState
@@ -18,7 +19,7 @@ const reducer = {
   flightBranch: flightReducer
 }
 
-const effects = []
+const effects = [FlightEffects]
 
 @NgModule({
   declarations: [
