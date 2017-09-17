@@ -13,3 +13,5 @@
 3. [Encapsulate side effects with @ngrx/effects](https://github.com/BioPhoton/angular-ngrx-refactoring/wiki/Encapsulate-side-effects-with-@ngrx-effects)  
 4. [Handling router state with @ngrx/router-store](https://github.com/BioPhoton/angular-ngrx-refactoring/wiki/Handling-router-state-with-@ngrx-router-store)  
 
+***
+![Angular-NGRX-refactoring](https://raw.githubusercontent.com/BioPhoton/angular-ngrx-refactoring/master/resources/demo-gif.gif)
