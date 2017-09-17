@@ -23,10 +23,28 @@
       <div class="card-body">
         The persistent state is a subset of the server state stored on the
         client.
-        It can be stored in memory in the local stored or anywhere else.
+        It can be stored in a cache object, in the local stored or anywhere else.
+        <br/>
+        It is a good practice to reflect this state in the url. i.e. bookmark
       </div>
     </div>
   </div>
+
+
+  <div class="col">
+    <div class="card">
+      <div class="card-header bg-success">
+        <h3>Client State</h3>
+      </div>
+      <div class="card-body">
+        The client state is only stored in memory in a non persistent way i. e. the values in form inputs
+        <br/>
+        It is a good practice to reflect this state in the url. i.e. bookmark
+      </div>
+    </div>
+
+  </div>
+
 
   <div class="col">
     <div class="card">
@@ -34,33 +52,36 @@
         <h3>Router/URL state</h3>
       </div>
       <div class="card-body">
-        The router/URL state is present in the browser search bar
+        The router/URL state is present in the browser search bar and as a structural representation in our code.
       </div>
     </div>
 
   </div>
 
   <div class="col">
+
+    <div class="card">
+      <div class="card-header">
+        <h3>Transient Client State</h3>
+      </div>
+      <div class="card-body">
+        The transient client state describes some sort of client state that is visible but not reflected in the url.
+        <br/>
+        A example would be the scroll position of your window or the time bar in a video player.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col">
+
     <div class="card">
       <div class="card-header bg-info">
-        <h3>Client state</h3>
+        <h3>Local UI State</h3>
       </div>
       <div class="card-body">
-        The values in the search form
-      </div>
-    </div>
-
-  </div>
-
-  <div class="col">
-
-    <div class="card">
-      <div class="card-header bg-primary">
-        <h3>Local UI state</h3>
-      </div>
-      <div class="card-body">
-        The local UI state describes some component internal UI state. i.e. a
-        progress spinner
+        The local UI state on the compoent level. It describes some component internal UI state.. i.e. a
+        progress spinner, collapsed state of accordion.
       </div>
     </div>
 
