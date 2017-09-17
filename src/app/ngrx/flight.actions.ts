@@ -9,7 +9,7 @@ export const FIND_FLIGHTS_FAIL = '[Flight] Find Fail'
 export class FindAction implements Action {
   type = FIND_FLIGHTS;
 
-  constructor(public payload?: any) {
+  constructor(public payload: { from: string, to: string }) {
   }
 }
 

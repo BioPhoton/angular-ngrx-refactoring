@@ -9,7 +9,8 @@ import {HomeModule} from './pages/home/home.module';
 import {StoreModule} from '@ngrx/store';
 import {flightReducer, IFlightState} from './ngrx/flight.reducer';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-
+import {EffectsModule} from '@ngrx/effects';
+import {FlightEffects} from './ngrx/flight.effects';
 
 export interface IDB {
   flightBranch: IFlightState
@@ -18,6 +19,8 @@ export interface IDB {
 const reducer = {
   flightBranch: flightReducer
 }
+
+const effects = [FlightEffects]
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ const reducer = {
     StoreModule.forRoot(reducer),
     StoreDevtoolsModule.instrument({
       maxAge: 10 //  Buffers the last 10 states
-    })
+    }),
+    EffectsModule.forRoot(effects)
   ],
   providers: [],
   bootstrap: [AppComponent]
