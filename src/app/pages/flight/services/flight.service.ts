@@ -23,14 +23,6 @@ export class FlightService {
 
   find(from?: string, to?: string) {
     this.store.dispatch(new flight.FindAction())
-    this.fr.find(from, to)
-      .subscribe(
-        n => {
-          this.store.dispatch(new flight.FindSuccessAction(n))
-        },
-        e => {
-          this.store.dispatch(new flight.FindFailAction())
-        })
   }
 
   edit(flight: Flight) {
