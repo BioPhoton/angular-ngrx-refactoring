@@ -8,7 +8,7 @@ import {FlightModule} from './pages/flight/flight.module';
 import {HomeModule} from './pages/home/home.module';
 import {StoreModule} from '@ngrx/store';
 import {flightReducer, IFlightState} from './ngrx/flight.reducer';
-
+import {EffectsModule} from '@ngrx/effects';
 
 export interface IDB {
   flightBranch: IFlightState
@@ -17,6 +17,8 @@ export interface IDB {
 const reducer = {
   flightBranch: flightReducer
 }
+
+const effects = []
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ const reducer = {
     CoreModule.forRoot(),
     HomeModule,
     FlightModule.forRoot(),
-    StoreModule.forRoot(reducer)
+    StoreModule.forRoot(reducer),
+    EffectsModule.forRoot(effects)
   ],
   providers: [],
   bootstrap: [AppComponent]
