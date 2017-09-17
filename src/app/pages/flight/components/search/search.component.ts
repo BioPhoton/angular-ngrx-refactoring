@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Flight} from '../../../../core/api/models/flight';
 import {FlightService} from '../../services/flight.service';
 import {DOCUMENT} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'search',
@@ -19,7 +20,9 @@ export class SearchComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: HTMLDocument,
     private fb: FormBuilder,
-    private fs: FlightService
+    private fs: FlightService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     console.log('location: ', this.document.location.href)
     // setup form
@@ -27,6 +30,12 @@ export class SearchComponent implements OnInit {
       from: [],
       to: []
     })
+
+    this.route.params.subscribe(
+      (data: { from: string, to: string }) => {
+        this.fs.find(data.from, data.to)
+      }
+    )
 
     this.searchResult$ = this.fs.flights$
       .map(flights => flights.sort(this.orderByDate))
@@ -48,7 +57,7 @@ export class SearchComponent implements OnInit {
 
   searchFlights(form: FormGroup) {
     const data = form.value
-    this.fs.find(data.from, data.to)
+    this.router.navigate(['./', {from: data.from, to: data.to}])
   }
 
   refreshFlights() {
