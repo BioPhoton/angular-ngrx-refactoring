@@ -7,10 +7,16 @@ import {CoreModule} from './core/core.module';
 import {FlightModule} from './pages/flight/flight.module';
 import {HomeModule} from './pages/home/home.module';
 import {StoreModule} from '@ngrx/store';
+import {flightReducer, IFlightState} from './ngrx/flight.reducer';
 
-export interface IDB {}
 
-const reducer = {}
+export interface IDB {
+  flightBranch: IFlightState
+}
+
+const reducer = {
+  flightBranch: flightReducer
+}
 
 @NgModule({
   declarations: [
