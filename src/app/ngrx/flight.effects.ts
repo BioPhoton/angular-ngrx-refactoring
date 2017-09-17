@@ -20,6 +20,20 @@ export class FlightEffects {
         .catch(e => Observable.of(new flight.FindFailAction()))
     })
 
+  @Effect()
+    // handle location update
+  locationUpdate$: Observable<Action> = this.actions$.ofType('ROUTER_NAVIGATION')
+    .filter((n: any) => {
+      return n.payload.event.url.indexOf('flight')
+    })
+    .switchMap((action: any) => {
+      // extract params from url
+      const rS = action.payload.routerState
+      const searchParams = rS.root.firstChild.params
+      // trigger FindAction with search params
+      return Observable.of(new flight.FindAction(searchParams))
+    });
+
   constructor(private actions$: Actions,
               private fr: FlightResource) {
   }
