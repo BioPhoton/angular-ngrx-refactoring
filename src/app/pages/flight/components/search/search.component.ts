@@ -7,7 +7,21 @@ import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'search',
-  templateUrl: './search.component.html'
+  templateUrl: './search.component.html',
+  styles: [`
+    input.is-valid {
+      border-width: 3px;
+    }
+    .url-state{
+      font-size: 14px;
+      width: 300px;
+      overflow-x: scroll;
+      display: block;
+    }
+    .bg-white {
+      background-color: #fff;
+    }
+  `]
 })
 export class SearchComponent implements OnInit {
 
