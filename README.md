@@ -3,7 +3,9 @@
 
 ***
 
-**Overview**  
+**[DEMO](https://biophoton.github.io/angular-ngrx-refactoring)**
+
+**[Overview](https://github.com/BioPhoton/angular-ngrx-refactoring/wiki/Angular-@NGRX-Refactoring---Overview)**  
 
 0. [Preconditions](https://github.com/BioPhoton/angular-ngrx-refactoring/wiki/Preconditions) 
 1. [Manage state with @ngrx/store](https://github.com/BioPhoton/angular-ngrx-refactoring/wiki/Manage-state-with-@ngrx/store) 
