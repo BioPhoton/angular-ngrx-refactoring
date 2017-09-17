@@ -1,12 +1,16 @@
 import {Injectable} from '@angular/core';
+import {Store} from '@ngrx/store';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
+import {IDB} from '../../../app.module';
 import {Flight} from '../../../core/api/models/flight';
 import {FlightResource} from '../../../core/api/resources/flight.resource';
+import * as flight from '../../../ngrx/flight.actions';
+import {IFlightState} from '../../../ngrx/flight.reducer';
+
 @Injectable()
 export class FlightService {
 
-  private _flights$: BehaviorSubject<Flight[]> = new BehaviorSubject([])
   readonly flights$: Observable<Flight[]>
 
   private _isFindPending$: BehaviorSubject<boolean> = new BehaviorSubject(false)
@@ -14,14 +18,11 @@ export class FlightService {
 
   constructor(
     private fr: FlightResource,
+    private store: Store<IDB>
   ) {
-    this.flights$ = this._flights$.asObservable()
+    this.flights$ = this.store.select<IFlightState>(state => state.flightBranch).select<Flight[]>(state => state.flights)
 
     this.isFindPending$ = this._isFindPending$.asObservable()
-  }
-
-  private setFlights(flights: Flight[]) {
-    this._flights$.next(flights);
   }
 
   find(from?: string, to?: string) {
@@ -29,7 +30,7 @@ export class FlightService {
     this.fr.find(from, to)
       .subscribe(
         n => {
-          this.setFlights(n)
+          this.store.dispatch(new flight.FindSuccessAction(n))
           this._isFindPending$.next(false)
         },
         e => {
