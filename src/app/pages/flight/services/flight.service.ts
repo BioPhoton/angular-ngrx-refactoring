@@ -6,7 +6,7 @@ import {IDB} from '../../../app.module';
 import {Flight} from '../../../core/api/models/flight';
 import {FlightResource} from '../../../core/api/resources/flight.resource';
 import * as flight from '../../../ngrx/flight.actions';
-import {IFlightState} from '../../../ngrx/flight.reducer';
+import * as fromFlight from '../../../ngrx/flight.reducer';
 
 @Injectable()
 export class FlightService {
@@ -20,7 +20,7 @@ export class FlightService {
     private fr: FlightResource,
     private store: Store<IDB>
   ) {
-    this.flights$ = this.store.select<IFlightState>(state => state.flightBranch).select<Flight[]>(state => state.flights)
+    this.flights$ = this.store.select<fromFlight.IFlightState>(fromFlight.getFlights)
 
     this.isFindPending$ = this._isFindPending$.asObservable()
   }
