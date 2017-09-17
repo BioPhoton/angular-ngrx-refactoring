@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {IDB} from '../../../app.module';
 import {Flight} from '../../../core/api/models/flight';
@@ -12,7 +11,6 @@ import * as fromFlight from '../../../ngrx/flight.reducer';
 export class FlightService {
 
   readonly flights$: Observable<Flight[]>
-
   readonly isFindPending$: Observable<boolean>
 
   constructor(
