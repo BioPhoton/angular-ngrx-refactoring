@@ -1,0 +1,25 @@
+<button class="btn btn-outline-secondary dropdown-toggle"
+  type="button"
+  id="flakeyHttpConfigButton"
+  data-toggle="dropdown"
+  aria-haspopup="true"
+  aria-expanded="false"
+  (click)="toggleOpen()">
+  Http Settings
+</button>
+<div class="dropdown-menu" aria-labelledby="flakeyHttpConfigButton"
+  [ngClass]="{'show': isOpen}" [formGroup]="configForm">
+
+  <h6 class="dropdown-header">Request Delay: {{delayRequestMs$ | async}}</h6>
+  <div class="form-group">
+    <input type="range" min=0 max=10000 step=100 name="requestDelayMs"
+      class="form-control" formControlName="requestDelayMs">
+  </div>
+
+  <h6 class="dropdown-header">Response Delay: {{delayResponseMs$ | async}}</h6>
+  <div class="form-group">
+    <input type="range" min=0 max=10000 step=100 name="responseDelayMs"
+      class="form-control" formControlName="responseDelayMs">
+  </div>
+
+</div>
