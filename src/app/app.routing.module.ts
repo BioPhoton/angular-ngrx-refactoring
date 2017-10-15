@@ -9,10 +9,6 @@ const APP_ROUTES: Routes = [
     redirectTo: 'home'
   },
   {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
     path: 'flight',
     loadChildren: 'app/pages/flight/flight.module#FlightModule'
   }
