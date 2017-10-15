@@ -1,7 +1,7 @@
-import {Flight} from '../core/api/models/flight';
+import {Flight} from '../../../core/api/models/flight';
 import * as flight from './flight.actions';
 import {createSelector} from '@ngrx/store';
-import {IDB} from '../app.module';
+import {IDB} from '../../../app.module';
 
 
 // the interface for FlightState

@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {Flight} from '../core/api/models/flight';
+import {Flight} from '../../../core/api/models/flight';
 
 export const FIND_FLIGHTS_SUCCESS = '[Flight] Find Success'
 export const FIND_FLIGHTS = '[Flight] Find'
