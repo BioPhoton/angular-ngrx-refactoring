@@ -9,7 +9,6 @@ import {StoreModule} from '@ngrx/store';
 import {IFlightState} from './pages/flight/state-management/flight.reducer';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
-import {FlightEffects} from './ngrx/flight.effects';
 import * as fromRouter from '@ngrx/router-store';
 import {
   CustomSerializer,
@@ -25,7 +24,7 @@ const reducer = {
   routerBranch: fromRouter.routerReducer
 }
 
-const effects = [FlightEffects]
+const effects = []
 
 @NgModule({
   declarations: [
