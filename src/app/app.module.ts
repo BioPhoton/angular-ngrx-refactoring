@@ -6,7 +6,7 @@ import {AppRouterModule} from './app.routing.module';
 import {CoreModule} from './core/core.module';
 import {HomeModule} from './pages/home/home.module';
 import {StoreModule} from '@ngrx/store';
-import {flightReducer, IFlightState} from './ngrx/flight.reducer';
+import {IFlightState} from './pages/flight/state-management/flight.reducer';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
 import {FlightEffects} from './ngrx/flight.effects';
@@ -22,7 +22,6 @@ export interface IDB {
 }
 
 const reducer = {
-  flightBranch: flightReducer,
   routerBranch: fromRouter.routerReducer
 }
 
