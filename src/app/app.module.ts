@@ -4,7 +4,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {AppRouterModule} from './app.routing.module';
 import {CoreModule} from './core/core.module';
-import {FlightModule} from './pages/flight/flight.module';
 import {HomeModule} from './pages/home/home.module';
 
 @NgModule({
@@ -14,7 +13,7 @@ import {HomeModule} from './pages/home/home.module';
   imports: [
     BrowserModule,
     AppRouterModule,
-    CoreModule.forRoot(),
+    CoreModule,
     HomeModule
   ],
   providers: [],
