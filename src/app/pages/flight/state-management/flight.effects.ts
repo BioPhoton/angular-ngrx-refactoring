@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 import {Observable} from 'rxjs/Observable';
 import {Action} from '@ngrx/store';
-import * as flight from '../pages/flight/state-management/flight.actions';
-import {FlightResource} from '../core/api/resources/flight.resource';
+import * as flight from './flight.actions';
+import {FlightResource} from '../../../core/api/resources/flight.resource';
 
 @Injectable()
 export class FlightEffects {
