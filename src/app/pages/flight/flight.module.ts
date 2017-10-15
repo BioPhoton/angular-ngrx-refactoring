@@ -12,6 +12,8 @@ import {FlightResolver} from './resolver/flight.resolver';
 import {FlightService} from './services/flight.service';
 import {StoreModule} from '@ngrx/store';
 import {flightReducer} from './state-management/flight.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {FlightEffects} from './state-management/flight.effects';
 
 const components = [
   FlightSearchComponent, FlightDetailComponent, FlightEditComponent, FlightCreateComponent
@@ -22,7 +24,8 @@ const components = [
     CommonModule,
     ReactiveFormsModule,
     FlightRoutingModule,
-    StoreModule.forFeature('flightBranch', flightReducer)
+    StoreModule.forFeature('flightBranch', flightReducer),
+    EffectsModule.forFeature([FlightEffects])
   ],
   providers: [FlightResolver, FlightService],
   declarations: [components],
