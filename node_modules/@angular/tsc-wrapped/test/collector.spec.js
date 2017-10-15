@@ -33,6 +33,7 @@ describe('Collector', function () {
             'exported-functions.ts',
             'exported-enum.ts',
             'exported-consts.ts',
+            'exported-type.ts',
             'local-symbol-ref.ts',
             'local-function-ref.ts',
             'local-symbol-ref-func.ts',
@@ -60,6 +61,11 @@ describe('Collector', function () {
         var sourceFile = program.getSourceFile('app/empty.ts');
         var metadata = collector.getMetadata(sourceFile);
         expect(metadata).toBeUndefined();
+    });
+    it('should return an interface reference for types', function () {
+        var sourceFile = program.getSourceFile('/exported-type.ts');
+        var metadata = collector.getMetadata(sourceFile);
+        expect(metadata).toEqual({ __symbolic: 'module', version: 3, metadata: { SomeType: { __symbolic: 'interface' } } });
     });
     it('should return an interface reference for interfaces', function () {
         var sourceFile = program.getSourceFile('app/hero.ts');
@@ -827,6 +833,7 @@ var FILES = {
     'class-inheritance-parent.ts': "\n    export class ParentClassFromOtherFile {}\n  ",
     'class-inheritance.ts': "\n    import {ParentClassFromOtherFile} from './class-inheritance-parent';\n\n    export class ParentClass {}\n\n    export declare class DeclaredChildClass extends ParentClass {}\n\n    export class ChildClassSameFile extends ParentClass {}\n\n    export class ChildClassOtherFile extends ParentClassFromOtherFile {}\n  ",
     'exported-functions.ts': "\n    export function one(a: string, b: string, c: string) {\n      return {a: a, b: b, c: c};\n    }\n    export function two(a: string, b: string, c: string) {\n      return {a, b, c};\n    }\n    export function three({a, b, c}: {a: string, b: string, c: string}) {\n      return [a, b, c];\n    }\n    export function supportsState(): boolean {\n     return !!window.history.pushState;\n    }\n    export function complexFn(x: any): boolean {\n      if (x) {\n        return true;\n      } else {\n        return false;\n      }\n    }\n    export declare function declaredFn();\n  ",
+    'exported-type.ts': "\n    export type SomeType = 'a' | 'b';\n  ",
     'exported-enum.ts': "\n    import {constValue} from './exported-consts';\n\n    export const someValue = 30;\n    export enum SomeEnum { A, B, C = 100, D };\n    export enum ComplexEnum { A, B, C = someValue, D = someValue + 10, E = constValue };\n  ",
     'exported-consts.ts': "\n    export const constValue = 100;\n  ",
     'static-method.ts': "\n    export class MyModule {\n      static with(comp: any): any[] {\n        return [\n          MyModule,\n          { provider: 'a', useValue: comp }\n        ];\n      }\n    }\n  ",
