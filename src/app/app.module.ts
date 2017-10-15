@@ -15,8 +15,7 @@ import {HomeModule} from './pages/home/home.module';
     BrowserModule,
     AppRouterModule,
     CoreModule.forRoot(),
-    HomeModule,
-    FlightModule.forRoot(),
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
