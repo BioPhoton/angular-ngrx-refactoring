@@ -47,7 +47,6 @@ export class FlightResource {
     return this
       .http
       .post<Flight>(this.baseUrl, flight)
-      .share()
       .catch((e: HttpErrorResponse) => {
         let errMsg = 'Client Error or Network Error'
 
@@ -66,6 +65,7 @@ export class FlightResource {
         }
         return Observable.throw({message: errMsg})
       })
+      .share()
   }
 
 }
