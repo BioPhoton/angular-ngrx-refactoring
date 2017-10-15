@@ -10,15 +10,19 @@ import {SearchComponent as FlightSearchComponent} from './components/search/sear
 import {FlightRoutingModule} from './flight-routing.module';
 import {FlightResolver} from './resolver/flight.resolver';
 import {FlightService} from './services/flight.service';
+import {StoreModule} from '@ngrx/store';
+import {flightReducer} from './state-management/flight.reducer';
 
 const components = [
-  FlightSearchComponent, FlightDetailComponent, FlightEditComponent, FlightCreateComponent,
+  FlightSearchComponent, FlightDetailComponent, FlightEditComponent, FlightCreateComponent
 ]
+
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FlightRoutingModule
+    FlightRoutingModule,
+    StoreModule.forFeature('flightBranch', flightReducer)
   ],
   providers: [FlightResolver, FlightService],
   declarations: [components],
