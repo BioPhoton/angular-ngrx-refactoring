@@ -1,6 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {FlakeyHttpConfigComponent} from './flakey-http/components/flakey-http-config/flakey-http-config.component';
 import {FLAKEY_HTTP_INTERCEPTER_PROVIDER} from './flakey-http/flakey-http.intercepter';
 import {FlightResource} from './api/resources/flight.resource';
@@ -13,18 +13,20 @@ import {ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     ReactiveFormsModule
   ],
+  providers: [
+    FlightResource,
+    FlakeyHttpConfigService,
+    FLAKEY_HTTP_INTERCEPTER_PROVIDER
+  ],
   declarations: [FlakeyHttpConfigComponent],
   exports: [FlakeyHttpConfigComponent]
 })
 export class CoreModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: CoreModule,
-      providers: [
-        FlightResource,
-        FlakeyHttpConfigService,
-        FLAKEY_HTTP_INTERCEPTER_PROVIDER
-      ]
+
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+    if (parentModule) {
+      throw new Error(
+        'CoreModule is already loaded. Import it in the AppModule only');
     }
   }
 }
