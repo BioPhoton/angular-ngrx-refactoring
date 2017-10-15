@@ -121,6 +121,25 @@ describe('metadata bundler', function () {
         ]);
         expect(result.metadata.origins['E']).toBeUndefined();
     });
+    it('should be able to de-duplicate symbols of re-exported modules', function () {
+        var host = new MockStringBundlerHost('/', {
+            'public-api.ts': "\n        export {A as A2, A, B as B1, B as B2} from './src/core';\n        export {A as A3} from './src/alternate';\n      ",
+            'src': {
+                'core.ts': "\n          export class A {}\n          export class B {}\n        ",
+                'alternate.ts': " \n          export class A {} \n        ",
+            }
+        });
+        var bundler = new bundler_1.MetadataBundler('/public-api', undefined, host);
+        var result = bundler.getMetadataBundle();
+        var _a = result.metadata.metadata, A = _a.A, A2 = _a.A2, A3 = _a.A3, B1 = _a.B1, B2 = _a.B2;
+        expect(A.__symbolic).toEqual('class');
+        expect(A2.__symbolic).toEqual('reference');
+        expect(A2.name).toEqual('A');
+        expect(A3.__symbolic).toEqual('class');
+        expect(B1.__symbolic).toEqual('class');
+        expect(B2.__symbolic).toEqual('reference');
+        expect(B2.name).toEqual('B1');
+    });
 });
 var MockStringBundlerHost = (function () {
     function MockStringBundlerHost(dirName, directory) {

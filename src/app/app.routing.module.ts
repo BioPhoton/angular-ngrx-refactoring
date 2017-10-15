@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './pages/home/home.component';
 
 const APP_ROUTES: Routes = [
   {
@@ -9,7 +10,7 @@ const APP_ROUTES: Routes = [
   },
   {
     path: 'home',
-    loadChildren: 'app/pages/home/home.module#HomeModule'
+    component: HomeComponent
   },
   {
     path: 'flight',
