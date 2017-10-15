@@ -237,7 +237,9 @@ var MetadataCollector = (function () {
             }
         });
         var isExportedIdentifier = function (identifier) { return exportMap.has(identifier.text); };
-        var isExported = function (node) { return isExport(node) || isExportedIdentifier(node.name); };
+        var isExported = function (node) {
+            return isExport(node) || isExportedIdentifier(node.name);
+        };
         var exportedIdentifierName = function (identifier) {
             return exportMap.get(identifier.text) || identifier.text;
         };
@@ -325,6 +327,17 @@ var MetadataCollector = (function () {
                     }
                     // Otherwise don't record metadata for the class.
                     break;
+                case ts.SyntaxKind.TypeAliasDeclaration:
+                    var typeDeclaration = node;
+                    if (typeDeclaration.name && isExported(typeDeclaration)) {
+                        var name_4 = exportedName(typeDeclaration);
+                        if (name_4) {
+                            if (!metadata)
+                                metadata = {};
+                            metadata[name_4] = { __symbolic: 'interface' };
+                        }
+                    }
+                    break;
                 case ts.SyntaxKind.InterfaceDeclaration:
                     var interfaceDeclaration = node;
                     if (interfaceDeclaration.name && isExported(interfaceDeclaration)) {
@@ -340,9 +353,9 @@ var MetadataCollector = (function () {
                     if (isExported(functionDeclaration) && functionDeclaration.name) {
                         if (!metadata)
                             metadata = {};
-                        var name_4 = exportedName(functionDeclaration);
+                        var name_5 = exportedName(functionDeclaration);
                         var maybeFunc = maybeGetSimpleFunction(functionDeclaration);
-                        metadata[name_4] =
+                        metadata[name_5] =
                             maybeFunc ? recordEntry(maybeFunc.func, node) : { __symbolic: 'function' };
                     }
                     break;
@@ -362,23 +375,23 @@ var MetadataCollector = (function () {
                             else {
                                 enumValue = evaluator.evaluateNode(member.initializer);
                             }
-                            var name_5 = undefined;
+                            var name_6 = undefined;
                             if (member.name.kind == ts.SyntaxKind.Identifier) {
                                 var identifier = member.name;
-                                name_5 = identifier.text;
-                                enumValueHolder[name_5] = enumValue;
+                                name_6 = identifier.text;
+                                enumValueHolder[name_6] = enumValue;
                                 writtenMembers++;
                             }
                             if (typeof enumValue === 'number') {
                                 nextDefaultValue = enumValue + 1;
                             }
-                            else if (name_5) {
+                            else if (name_6) {
                                 nextDefaultValue = {
                                     __symbolic: 'binary',
                                     operator: '+',
                                     left: {
                                         __symbolic: 'select',
-                                        expression: recordEntry({ __symbolic: 'reference', name: enumName }, node), name: name_5
+                                        expression: recordEntry({ __symbolic: 'reference', name: enumName }, node), name: name_6
                                     }
                                 };
                             }
@@ -439,13 +452,13 @@ var MetadataCollector = (function () {
                             var report_1 = function (nameNode) {
                                 switch (nameNode.kind) {
                                     case ts.SyntaxKind.Identifier:
-                                        var name_6 = nameNode;
-                                        var varValue = errorSym('Destructuring not supported', name_6);
-                                        locals.define(name_6.text, varValue);
+                                        var name_7 = nameNode;
+                                        var varValue = errorSym('Destructuring not supported', name_7);
+                                        locals.define(name_7.text, varValue);
                                         if (isExport(node)) {
                                             if (!metadata)
                                                 metadata = {};
-                                            metadata[name_6.text] = varValue;
+                                            metadata[name_7.text] = varValue;
                                         }
                                         break;
                                     case ts.SyntaxKind.BindingElement:
@@ -647,9 +660,9 @@ function namesOf(parameters) {
             var bindingPattern = name;
             for (var _i = 0, _a = bindingPattern.elements; _i < _a.length; _i++) {
                 var element = _a[_i];
-                var name_7 = element.name;
-                if (name_7) {
-                    addNamesOf(name_7);
+                var name_8 = element.name;
+                if (name_8) {
+                    addNamesOf(name_8);
                 }
             }
         }
