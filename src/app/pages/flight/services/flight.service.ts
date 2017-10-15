@@ -4,8 +4,8 @@ import {Observable} from 'rxjs/Observable';
 import {IDB} from '../../../app.module';
 import {Flight} from '../../../core/api/models/flight';
 import {FlightResource} from '../../../core/api/resources/flight.resource';
-import * as flight from '../../../ngrx/flight.actions';
-import * as fromFlight from '../../../ngrx/flight.reducer';
+import * as flight from '../state-management/flight.actions';
+import * as fromFlight from '../state-management/flight.reducer';
 
 @Injectable()
 export class FlightService {
