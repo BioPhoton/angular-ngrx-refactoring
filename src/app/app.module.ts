@@ -14,7 +14,7 @@ import {StateManagementModule} from './state-management/state-management.module'
   imports: [
     BrowserModule,
     AppRouterModule,
-    CoreModule.forRoot(),
+    CoreModule,
     HomeModule,
     StateManagementModule
   ],
