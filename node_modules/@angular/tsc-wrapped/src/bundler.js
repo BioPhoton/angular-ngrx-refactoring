@@ -185,14 +185,40 @@ var MetadataBundler = (function () {
             }
         }
         exportedSymbols.forEach(function (symbol) { return _this.convertSymbol(symbol); });
+        var symbolsMap = new Map();
         Array.from(this.symbolMap.values()).forEach(function (symbol) {
             if (symbol.referenced && !symbol.reexport) {
                 var name_3 = symbol.name;
+                var identifier = symbol.declaration.module + ":" + symbol.declaration.name;
                 if (symbol.isPrivate && !symbol.privateName) {
                     name_3 = newPrivateName();
                     symbol.privateName = name_3;
                 }
+                if (symbolsMap.has(identifier)) {
+                    var names = symbolsMap.get(identifier);
+                    names.push(name_3);
+                }
+                else {
+                    symbolsMap.set(identifier, [name_3]);
+                }
                 result[name_3] = symbol.value;
+            }
+        });
+        // check for duplicated entries
+        symbolsMap.forEach(function (names, identifier) {
+            if (names.length > 1) {
+                var _a = identifier.split(':'), module_1 = _a[0], declaredName = _a[1];
+                // prefer the export that uses the declared name (if any)
+                var reference_1 = names.indexOf(declaredName);
+                if (reference_1 === -1) {
+                    reference_1 = 0;
+                }
+                // keep one entry and replace the others by references
+                names.forEach(function (name, i) {
+                    if (i !== reference_1) {
+                        result[name] = { __symbolic: 'reference', name: names[reference_1] };
+                    }
+                });
             }
         });
         return result;
@@ -204,17 +230,17 @@ var MetadataBundler = (function () {
             var symbol = exportedSymbols_3[_i];
             if (symbol.reexport) {
                 var declaration = symbol.declaration;
-                var module_1 = declaration.module;
+                var module_2 = declaration.module;
                 if (declaration.name == '*') {
                     // Reexport all the symbols.
                     exportAlls.add(declaration.module);
                 }
                 else {
                     // Re-export the symbol as the exported name.
-                    var entry = modules.get(module_1);
+                    var entry = modules.get(module_2);
                     if (!entry) {
                         entry = [];
-                        modules.set(module_1, entry);
+                        modules.set(module_2, entry);
                     }
                     var as = symbol.name;
                     var name_4 = declaration.name;
@@ -232,9 +258,9 @@ var MetadataBundler = (function () {
         if (!canonicalSymbol.referenced) {
             canonicalSymbol.referenced = true;
             var declaration = canonicalSymbol.declaration;
-            var module_2 = this.getMetadata(declaration.module);
-            if (module_2) {
-                var value = module_2.metadata[declaration.name];
+            var module_3 = this.getMetadata(declaration.module);
+            if (module_3) {
+                var value = module_3.metadata[declaration.name];
                 if (value && !declaration.name.startsWith('___')) {
                     canonicalSymbol.value = this.convertEntry(declaration.module, value);
                 }
