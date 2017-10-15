@@ -28,7 +28,7 @@ const effects = [FlightEffects]
   imports: [
     BrowserModule,
     AppRouterModule,
-    CoreModule.forRoot(),
+    CoreModule,
     HomeModule,
     StoreModule.forRoot(reducer),
     StoreDevtoolsModule.instrument({
