@@ -3,12 +3,11 @@
 
 ***
 
-This is **NO BLABLA TALK**! Hands on live coding. 
-We will start from a common state => Custom made stores/services that manages your state (dirty).
-After I showed you **REAL RACE CONDITIONS** and broken state in the app we will fix this problem by implementing the REDUX pattern.
+This is **NO BLABLA TALK**! Hands on live coding.  
+We will start with custom made stores/services that manages your state dirty and spreaded all over the app.
+After I showed you **REAL RACE CONDITIONS** and broken state in the app we will fix this problem by implementing the REDUX pattern and some RxJS operators.
 
-This is no beginners talk. I expect you to know the basics of REDUX and experienced some pain in statemanagement.
-
+**This is no beginners talk. I expect you to know the basics of REDUX and experienced some pain in statemanagement.**
 After this talk you will go home with enought knowledge to improve you redux implementation.
 
 We will:
