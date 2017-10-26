@@ -3,6 +3,25 @@
 
 ***
 
+This is **NO BLABLA TALK**! Hands on live coding. 
+We will start from a common state => Custom made stores/services that manages your state (dirty).
+After I showed you **REAL RACE CONDITIONS** and broken state in the app we will fix this problem by implementing the REDUX pattern.
+
+This is no beginners talk. I expect you to know the basics of REDUX and experienced some pain in statemanagement.
+
+After this talk you will go home with enought knowledge to improve you redux implementation.
+
+We will:
+- implemet te redux pattern strongly typed
+- manage state with a redux store
+- using browserplugins to do timetravel debugging (boring)
+- encapsulate side effects
+- handling router states
+- splitting statemanagement into feature modules
+- implementing optimistic updates
+- dealing with form errors => http calls will retur an error and we will find a solution on how to handle user feedback with the REDUX pattern. This is interesting for angular and react! And curreltly there is no clean solution out there. We will change this. ;-)
+- select combined state
+
 **[DEMO](https://biophoton.github.io/angular-ngrx-refactoring)**
 
 **[Overview](https://github.com/BioPhoton/angular-ngrx-refactoring/wiki/Angular-@NGRX-Refactoring---Overview)**  
