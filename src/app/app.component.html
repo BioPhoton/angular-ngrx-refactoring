@@ -23,6 +23,10 @@
           <a class="nav-link" [routerLink]="['flight']"
             (click)="toggleNav(true)">Flight</a>
         </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['airport']"
+            (click)="toggleNav(true)">Airport</a>
+        </li>
       </ul>
 
       <app-flakey-http-config></app-flakey-http-config>

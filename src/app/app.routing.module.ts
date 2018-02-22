@@ -15,6 +15,10 @@ const APP_ROUTES: Routes = [
   {
     path: 'flight',
     loadChildren: 'app/pages/flight/flight.module#FlightModule'
+  },
+  {
+    path: 'airport',
+    loadChildren: 'app/pages/airport/airport.module#AirportModule'
   }
 ];
 const extraOptions = { useHash: true }
