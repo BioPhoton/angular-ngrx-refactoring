@@ -3,7 +3,6 @@
 
 ***
 
-This is **NO BLABLA TALK**! Hands on live coding.  
 We will start with custom made stores/services that manages your state dirty and spreaded all over the app.
 After I showed you **REAL RACE CONDITIONS** and broken state in the app we will fix this problem by implementing the REDUX pattern and some RxJS operators.
 
